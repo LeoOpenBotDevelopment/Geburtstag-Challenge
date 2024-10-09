@@ -291,14 +291,15 @@
         container.innerHTML = ''; // Alle Blöcke zurücksetzen
         matchedPairs = 0; // Übereinstimmungen zurücksetzen
         initializeBlocks(); // Blöcke neu initialisieren
-        const backgroundElement = document.getElementById("backgroundElement");
-        const Geschenk_Bild = document.getElementById("Geschenk-Bild");
-        const Geschenk_Text = document.getElementById("Geschenk-Text");
+        let backgroundElemen = document.getElementById("backgroundElement");
+        let GeschenkBild = document.getElementById("Geschenk-Bild");
+        let GeschenkText = document.getElementById("Geschenk-Text");
 
-        backgroundElement.style.backgroundImage = "url('IMG_7010.jpeg')"; // Neues Hintergrundbild
-        backgroundElement.style.filter = "grayscale(50%) blur(5px)";
-        Geschenk_Bild.src = "IMG_7010.jpeg"; // Aktualisiere das Bild
-        Geschenk_Text.innerText = "das bild habe ich malifiziert!";
+        backgroundElemen.style.backgroundImage = "url('IMG_7010.jpeg')"; // Neues Hintergrundbild
+        backgroundElemen.style.filter = "grayscale(50%) blur(5px)";
+        //GeschenkBild.src = "IMG_7010.jpeg";
+	GeschenkBild.src = "IMG_7010.jpeg?cache_buster=" + new Date().getTime();
+        GeschenkText.innerText = "das bild habe ich malifiziert!";
     }
 
     initializeBlocks(); // Startet das Spiel
