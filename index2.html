@@ -25,7 +25,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('Nature_i.png'); /* Hintergrundbild */
+            background-image: url('IMG_7004.jpeg'); /* Hintergrundbild */
             background-size: cover;
             transition: background-image 0.5s ease-in-out; /* Sanfte Übergänge für Bildwechsel */
             filter: grayscale(50%) blur(5px);
@@ -116,8 +116,8 @@
 <body>
 
 <div class="modal" id="imageModal">
-    <img src="Nature_i.png" alt="Bild nicht angezeigt" id="Geschenk-Bild">
-    <p id="Geschenk-Text">Dies ist das Bild eines Waldes!</p>
+    <img src="IMG_7004.jpeg" alt="Bild nicht angezeigt" id="Geschenk-Bild">
+    <p id="Geschenk-Text">ich habe mit diesem bild versucht dich als anime zu malen!</p>
     <button onclick="downloadImage()">Bild herunterladen</button>
     <button onclick="closeModal()">Weiter</button>
 </div>
@@ -262,10 +262,10 @@
         const Geschenk_Bild = document.getElementById("Geschenk-Bild");
         const Geschenk_Text = document.getElementById("Geschenk-Text");
 
-        backgroundElement.style.backgroundImage = "url(Nature_bgc.png)"; // Neues Hintergrundbild
+        backgroundElement.style.backgroundImage = "url('IMG_7010.jpeg')"; // Neues Hintergrundbild
         backgroundElement.style.filter = "grayscale(50%) blur(5px)";
-        Geschenk_Bild.src = "Nature_bgc.png"; // Aktualisiere das Bild
-        Geschenk_Text.innerText = "Dies ist das Bild eines dunklen Holzwalls!";
+        Geschenk_Bild.src = "IMG_7010.jpeg"; // Aktualisiere das Bild
+        Geschenk_Text.innerText = "das bild habe ich malifiziert!";
     }
 
     initializeBlocks(); // Startet das Spiel
