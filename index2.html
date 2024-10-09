@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Spiel mit Blöcken</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #001d3f;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            position: relative;
+            width: 400px; /* Breite des Quadrats */
+            height: 400px; /* Höhe des Quadrats */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #backgroundElement {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('Nature_i.png'); /* Hintergrundbild */
+            background-size: cover;
+            transition: background-image 0.5s ease-in-out; /* Sanfte Übergänge für Bildwechsel */
+            filter: grayscale(50%) blur(5px);
+        }
+        .block {
+            position: absolute;
+            width: 100px; /* Breite jedes Blocks */
+            height: 100px; /* Höhe jedes Blocks */
+            background-color: rgba(255, 255, 255, 1); /* Hintergrundfarbe der Blöcke */
+            border: 2px solid #fff; /* Rahmen für bessere Sichtbarkeit */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .block.flip {
+            transform: rotateY(180deg);
+        }
+        .block-content {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .block .front {
+            background-color: rgba(255, 255, 255, 1);
+            color: #ccc;
+        }
+        .block .back {
+            background-color: rgba(255, 255, 255, 1);
+            transform: rotateY(180deg);
+            color: #007AFF; 
+        }
+        .block.flip .front {
+            display: none;
+        }
+        .block.flip .back {
+            display: flex;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.5);
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 70vh;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .modal a,
+        .modal button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #f8c291;
+            border: none;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .modal a:hover,
+        .modal button:hover {
+            background-color: #e77f67;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal" id="imageModal">
+    <img src="Nature_i.png" alt="Bild nicht angezeigt" id="Geschenk-Bild">
+    <p id="Geschenk-Text">Dies ist das Bild eines Waldes!</p>
+    <button onclick="downloadImage()">Bild herunterladen</button>
+    <button onclick="closeModal()">Weiter</button>
+</div>
+
+<div id="container">
+    <div id="backgroundElement"></div> <!-- Hintergrund-Element -->
+</div>
+
+<script>
+    const symbols = ['€', '$', '☼', '◷', '□', '∞', '★', '♫', '€', '$', '☼', '◷', '□', '∞', '★', '♫']; // Symbole für die Memory-Karten
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false; // Verhindert, dass mehr als zwei Karten gleichzeitig umgedreht werden
+    let matchedPairs = 0;
+    const totalBlocks = 16;
+
+    // Initialisierung der Blöcke (Memory-Karten)
+    function initializeBlocks() {
+        const container = document.getElementById("container");
+        const shuffledSymbols = shuffle(symbols); // Symbole mischen
+        for (let i = 0; i < totalBlocks; i++) {
+            const block = document.createElement("button");
+            block.className = "block";
+            block.dataset.symbol = shuffledSymbols[i];
+            block.style.left = (i % 4) * 100 + "px"; // Position X
+            block.style.top = Math.floor(i / 4) * 100 + "px"; // Position Y
+
+            // Vorderseite (leere Fläche)
+            const front = document.createElement("div");
+            front.classList.add('block-content', 'front');
+            front.innerHTML = "?"; // Fragezeichen auf der Vorderseite
+
+            // Rückseite (Symbol)
+            const back = document.createElement("div");
+            back.classList.add('block-content', 'back');
+            back.innerHTML = shuffledSymbols[i]; // Symbol auf der Rückseite
+
+            block.appendChild(front);
+            block.appendChild(back);
+
+            block.addEventListener('click', flipBlock);
+            container.appendChild(block);
+        }
+    }
+
+    // Mischen der Symbole
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    // Block drehen
+    function flipBlock() {
+        if (lockBoard || this === firstCard) return; // Verhindert doppelte Klicks oder Sperre
+
+        this.classList.add('flip');
+
+        if (!firstCard) {
+            firstCard = this;
+        } else {
+            secondCard = this;
+            lockBoard = true; // Sperre aktivieren
+
+            checkForMatch();
+        }
+    }
+
+    // Überprüfen, ob die Karten übereinstimmen
+    function checkForMatch() {
+        if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+            matchedCards();
+        } else {
+            unflipCards();
+        }
+    }
+
+    // Karten passen
+    function matchedCards() {
+        setTimeout(() => {
+            firstCard.style.visibility = 'hidden'; // Karten verschwinden lassen
+            secondCard.style.visibility = 'hidden';
+            matchedPairs++;
+
+            resetBoard();
+
+            if (matchedPairs === totalBlocks / 2) { // Alle Paare gefunden
+                showModal();
+            }
+        }, 1000);
+    }
+
+    // Karten passen nicht
+    function unflipCards() {
+        setTimeout(() => {
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+            resetBoard();
+        }, 1000);
+    }
+
+    // Spiel-Board zurücksetzen
+    function resetBoard() {
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+    }
+
+    // Modal anzeigen
+    function showModal() {
+        document.getElementById("imageModal").style.display = "block";
+    }
+
+    // Modal schließen
+	let showimagesvalue = 1;
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+		if (showimagesvalue == 2){
+			window.location.href = "index3.html";
+		}else{
+			showimagesvalue = 2;
+			resetGame();
+		}
+    }
+
+    // Bild herunterladen
+    function downloadImage() {
+        const image = document.getElementById("Geschenk-Bild");
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.download = 'Geschenk-Bild.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Spiel zurücksetzen
+    function resetGame() {
+        const container = document.getElementById("container");
+        container.innerHTML = ''; // Alle Blöcke zurücksetzen
+        matchedPairs = 0; // Übereinstimmungen zurücksetzen
+        initializeBlocks(); // Blöcke neu initialisieren
+		const backgroundElement = document.getElementById("backgroundElement");
+        const Geschenk_Bild = document.getElementById("Geschenk-Bild");
+        const Geschenk_Text = document.getElementById("Geschenk-Text");
+
+        backgroundElement.style.backgroundImage = "url(Nature_bgc.png)"; // Neues Hintergrundbild
+        backgroundElement.style.filter = "grayscale(50%) blur(5px)";
+        Geschenk_Bild.src = "Nature_bgc.png"; // Aktualisiere das Bild
+        Geschenk_Text.innerText = "Dies ist das Bild eines dunklen Holzwalls!";
+    }
+
+    initializeBlocks(); // Startet das Spiel
+</script>
+</body>
+</html>
