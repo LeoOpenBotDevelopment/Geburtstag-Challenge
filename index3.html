@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #001d3f; /* Hintergrundfarbe */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 600px; /* Maximale Breite der Bilder */
+            margin: 10px 0;
+            border-radius: 10px; /* Abgerundete Ecken */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Schatten */
+        }
+
+        /* Responsive Anpassungen */
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            img {
+                max-width: 48%; /* Bilder nebeneinander auf größeren Bildschirmen */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="Nature_bgc.png" alt="Image 1">
+        <img src="Nature_i.png" alt="Image 2">
+    </div>
+</body>
+</html>
