@@ -111,6 +111,19 @@
             background-color: #e77f67;
             transform: scale(1.05);
         }
+	.confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            color: red;
+            font-size: 2em;
+            animation: confettiFall 4s linear infinite;
+        }
+	@keyframes confettiFall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
     </style>
 </head>
 <body>
@@ -227,18 +240,21 @@
     // Modal anzeigen
     function showModal() {
         document.getElementById("imageModal").style.display = "block";
+	const backgroundElement = document.getElementById("backgroundElement");
+	backgroundElement.style.filter = "none";
+	startConfetti();
     }
 
     // Modal schließen
-	let showimagesvalue = 1;
+    let showimagesvalue = 1;
     function closeModal() {
         document.getElementById("imageModal").style.display = "none";
-		if (showimagesvalue == 2){
-			window.location.href = "index3.html";
-		}else{
-			showimagesvalue = 2;
-			resetGame();
-		}
+	if (showimagesvalue == 2){
+	    window.location.href = "index3.html";
+	}else{
+	    showimagesvalue = 2;
+	    resetGame();
+	}
     }
 
     // Bild herunterladen
@@ -251,6 +267,23 @@
         link.click();
         document.body.removeChild(link);
     }
+    function createConfetti() {
+        const confettiContainer = document.createElement('div');
+        confettiContainer.className = 'confetti';
+        confettiContainer.style.left = Math.random() * 100 + 'vw';
+        //confettiContainer.style.color = hsl(${Math.random() * 360}, 100%, 50%);
+        confettiContainer.textContent = "♥";
+        document.body.appendChild(confettiContainer);
+        setTimeout(() => {
+            confettiContainer.remove();
+        }, 4000);
+    }
+    function startConfetti() {
+        //setInterval(createConfetti, 100);
+	for (let i = 0; i < 50; i++) {
+            setTimeout(createConfetti, i * 100);
+        }
+    }
 
     // Spiel zurücksetzen
     function resetGame() {
@@ -258,7 +291,7 @@
         container.innerHTML = ''; // Alle Blöcke zurücksetzen
         matchedPairs = 0; // Übereinstimmungen zurücksetzen
         initializeBlocks(); // Blöcke neu initialisieren
-		const backgroundElement = document.getElementById("backgroundElement");
+        const backgroundElement = document.getElementById("backgroundElement");
         const Geschenk_Bild = document.getElementById("Geschenk-Bild");
         const Geschenk_Text = document.getElementById("Geschenk-Text");
 
