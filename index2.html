@@ -290,16 +290,16 @@
         const container = document.getElementById("container");
         container.innerHTML = ''; // Alle Blöcke zurücksetzen
         matchedPairs = 0; // Übereinstimmungen zurücksetzen
-        initializeBlocks(); // Blöcke neu initialisieren
         let backgroundElemen = document.getElementById("backgroundElement");
         let GeschenkBild = document.getElementById("Geschenk-Bild");
         let GeschenkText = document.getElementById("Geschenk-Text");
 
-        backgroundElemen.style.backgroundImage = "url('IMG_7010.jpeg')"; // Neues Hintergrundbild
+        backgroundElemen.style.backgroundImage = "url('IMG_7014.jpeg')"; // Neues Hintergrundbild
         backgroundElemen.style.filter = "grayscale(50%) blur(5px)";
         //GeschenkBild.src = "IMG_7010.jpeg";
-	GeschenkBild.src = "IMG_7010.jpeg?cache_buster=" + new Date().getTime();
+	GeschenkBild.src = "IMG_7014.jpeg?cache_buster=" + new Date().getTime();
         GeschenkText.innerText = "das bild habe ich malifiziert!";
+	initializeBlocks();
     }
 
     initializeBlocks(); // Startet das Spiel
