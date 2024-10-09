@@ -69,3 +69,61 @@ h2 {
 #nextButton:hover {
     background-color: #ffb703; /* Gelb */
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.5);
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.modal a,
+.modal button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #f8c291;
+    border: none;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal a:hover,
+.modal button:hover {
+    background-color: #e77f67;
+    transform: scale(1.05);
+}
+
+.confetti {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    color: red;
+    font-size: 2em;
+    animation: confettiFall 4s linear infinite;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
