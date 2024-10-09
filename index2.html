@@ -288,9 +288,9 @@
     // Spiel zurücksetzen
     function resetGame() {
         const container = document.getElementById("container");
-        container.innerHTML = ''; // Alle Blöcke zurücksetzen
+        container.innerHTML = '<div id="backgroundElement"></div>'; // Alle Blöcke zurücksetzen
         matchedPairs = 0; // Übereinstimmungen zurücksetzen
-        /*let backgroundElemen = document.getElementById("backgroundElement");
+        let backgroundElemen = document.getElementById("backgroundElement");
         let GeschenkBild = document.getElementById("Geschenk-Bild");
         let GeschenkText = document.getElementById("Geschenk-Text");
 
@@ -298,33 +298,7 @@
         backgroundElemen.style.filter = "grayscale(50%) blur(5px)";
         //GeschenkBild.src = "IMG_7010.jpeg";
 	GeschenkBild.src = "IMG_7014.jpeg";
-        GeschenkText.textContent = "das bild habe ich malifiziert!";*/
-	let backgroundElement = document.getElementById("backgroundElement");
-        let GeschenkBild = document.getElementById("Geschenk-Bild");
-        let GeschenkText = document.getElementById("Geschenk-Text");
-
-        console.log("backgroundElement:", backgroundElement);
-        console.log("GeschenkBild:", GeschenkBild);
-        console.log("GeschenkText:", GeschenkText);
-
-        if (backgroundElement) {
-            backgroundElement.style.backgroundImage = "url('IMG_7014.jpeg')"; // Neues Hintergrundbild
-            backgroundElement.style.filter = "grayscale(50%) blur(5px)";
-        } else {
-            console.error("backgroundElement not found!");
-        }
-
-        if (GeschenkBild) {
-            GeschenkBild.src = "IMG_7014.jpeg"; // Aktualisiertes Bild
-        } else {
-            console.error("GeschenkBild not found!");
-        }
- 
-        if (GeschenkText) {
-            GeschenkText.textContent = "das bild habe ich malifiziert!";
-        } else {
-            console.error("GeschenkText not found!");
-        }
+        GeschenkText.textContent = "das bild habe ich malifiziert!";
 	initializeBlocks();
     }
 
