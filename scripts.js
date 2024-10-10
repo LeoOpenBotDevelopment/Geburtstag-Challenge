@@ -120,10 +120,10 @@ function showQuestion(question) {
 function selectAnswer(correct, thiselementwasclicked) {
     if (correct) {
         //alert('Richtig!');
-		thiselementwasclicked.style.background = "green";
+	thiselementwasclicked.style.background = "green";
     } else {
         //alert('Falsch!');
-		thiselementwasclicked.style.background = "red";
+	thiselementwasclicked.style.background = "red";
     }
     nextButton.style.display = 'block'; // Nächster Button anzeigen
 }
@@ -133,10 +133,8 @@ nextButton.addEventListener('click', () => {
     if (currentQuestionIndex < questions.length) {
         showQuestion(questions[currentQuestionIndex]);
     } else {
-        alert('Quiz beendet!'); // Quiz wird beendet, wenn alle Fragen gefragt wurden
-        currentQuestionIndex = 0; // Optional: Fragen zurücksetzen
-        startGame(); // Quiz zurücksetzen
-		window.location.href = "index2.html";
+	document.getElementById("imageModal").style.display = "block";
+	startConfetti();
     }
 });
 
@@ -147,6 +145,41 @@ function startColorChange() {
         quizContainer.style.backgroundColor = `hsl(${hue}, 100%, 75%)`;
         if (hue >= 360) hue = 0; // Zurücksetzen des Farbtons
     }, 100); // Alle 100 ms ändern
+}
+
+function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+	currentQuestionIndex = 0; // Optional: Fragen zurücksetzen
+        //startGame();
+	window.location.href = "index2.html";
+}
+
+// Bild herunterladen
+function downloadImage() {
+        const image = document.getElementById("Geschenk-Bild");
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.download = 'Geschenk-Bild.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+}
+function createConfetti() {
+        const confettiContainer = document.createElement('div');
+        confettiContainer.className = 'confetti';
+        confettiContainer.style.left = Math.random() * 100 + 'vw';
+        //confettiContainer.style.color = hsl(${Math.random() * 360}, 100%, 50%);
+        confettiContainer.textContent = "♥";
+        document.body.appendChild(confettiContainer);
+        setTimeout(() => {
+            confettiContainer.remove();
+        }, 4000);
+}
+function startConfetti() {
+    //setInterval(createConfetti, 100);
+    for (let i = 0; i < 50; i++) {
+        setTimeout(createConfetti, i * 100);
+    }
 }
 
 startGame();
