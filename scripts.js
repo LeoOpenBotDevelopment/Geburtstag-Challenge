@@ -6,34 +6,35 @@ const quizContainer = document.getElementById('quizContainer');
 
 const questions = [
     {
-        question: "<h2>Wer ist die Hauptfigur in der 'Throne of Glass'-Serie?</h2>",
+        question: "<h3>Wer ist die Hauptfigur in der 'Throne of Glass'-Serie?</h3>",
         answers: `
-            <button class='questionbtn' onclick='selectAnswer(true, this)'>Celaena Sardothien</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Aelin Ashryver Galathynius</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Dorian Havilliard</button>
+	    <button class='questionbtn' onclick='selectAnswer(true, this)'>Celaena Sardothien</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Chaol Westfall</button>
         `
     },
     {
-        question: "<h2>Was ist das ursprüngliche Berufsziel von Celaena?</h2>",
+        question: "<h3>Was ist das ursprüngliche Berufsziel von Celaena?</h3>",
         answers: `
             <button class='questionbtn' onclick='selectAnswer(true, this)'>Assassine</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Kriegerin</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Magierin</button>
+	    <button class='questionbtn' onclick='selectAnswer(true, this)'>Assassine</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Diebin</button>
         `
     },
     {
-        question: "<h2>Welcher König herrscht über das Reich von Adarlan?</h2>",
+        question: "<h3>Welcher König herrscht über das Reich von Adarlan?</h3>",
         answers: `
+	    <button class='questionbtn' onclick='selectAnswer(false, this)'>König Aedion</button>
             <button class='questionbtn' onclick='selectAnswer(true, this)'>König Havilliard</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>König Rowan</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>König Dorian</button>
-            <button class='questionbtn' onclick='selectAnswer(false, this)'>König Aedion</button>
         `
     },
     {
-        question: "<h2>Welches magische Element spielt eine große Rolle in der Geschichte?</h2>",
+        question: "<h3>Welches magische Element spielt eine große Rolle in der Geschichte?</h3>",
         answers: `
             <button class='questionbtn' onclick='selectAnswer(true, this)'>Feuer</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Wasser</button>
@@ -42,25 +43,25 @@ const questions = [
         `
     },
     {
-        question: "<h2>Welcher Charakter wird als Celaenas Freund und Vertrauter beschrieben?</h2>",
+        question: "<h3>Welcher Charakter wird als Celaenas Freund und Vertrauter beschrieben?</h3>",
         answers: `
-            <button class='questionbtn' onclick='selectAnswer(true, this)'>Nehemia</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Dorian</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Chaol</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Aedion</button>
+	    <button class='questionbtn' onclick='selectAnswer(true, this)'>Nehemia</button>
         `
     },
     {
-        question: "<h2>Was ist der Name des Turniers, an dem Celaena teilnimmt?</h2>",
+        question: "<h3>Was ist der Name des Turniers, an dem Celaena teilnimmt?</h3>",
         answers: `
-            <button class='questionbtn' onclick='selectAnswer(true, this)'>Die Wettkämpfe</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Das Turnier der Magier</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Der große Krieg</button>
+	    <button class='questionbtn' onclick='selectAnswer(true, this)'>Die Wettkämpfe</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Die Arena der Tode</button>
         `
     },
     {
-        question: "<h2>Welches Reich ist Celaena im ersten Buch loyal?</h2>",
+        question: "<h3>Welches Reich ist Celaena im ersten Buch loyal?</h3>",
         answers: `
             <button class='questionbtn' onclick='selectAnswer(true, this)'>Adarlan</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Terrasen</button>
@@ -69,7 +70,7 @@ const questions = [
         `
     },
     {
-        question: "<h2>Welcher Charakter ist der Hauptantagonist in der Serie?</h2>",
+        question: "<h3>Welcher Charakter ist der Hauptantagonist in der Serie?</h3>",
         answers: `
             <button class='questionbtn' onclick='selectAnswer(true, this)'>Die Königin von Morath</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>König Havilliard</button>
@@ -78,16 +79,16 @@ const questions = [
         `
     },
     {
-        question: "<h2>Was ist Celaenas größter Traum?</h2>",
+        question: "<h3>Was ist Celaenas größter Traum?</h3>",
         answers: `
-            <button class='questionbtn' onclick='selectAnswer(true, this)'>Ihren eigenen Thron zu besteigen</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Ein normales Leben zu führen</button>
+	    <button class='questionbtn' onclick='selectAnswer(true, this)'>Ihren eigenen Thron zu besteigen</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Eine mächtige Magierin zu werden</button>
             <button class='questionbtn' onclick='selectAnswer(false, this)'>Das Land zu retten</button>
         `
     },
     {
-        question: "<h2>findest du die lüge?</h2><h4>klicke auf die lüge</h4>",
+        question: "<h3>findest du die lüge?</h3><h4>klicke auf die lüge</h4>",
         answers: `
             <p>In den Weiten von Erilea, wo der Wind durch die Bäume flüstert und alte Geheimnisse in den Schatten lauern, begann eine Reise, die von Legenden erzählt wurde. Celaena Sardothien, eine Assassine ohnegleichen, wanderte durch die Lande auf der Suche nach der Wahrheit. Viele glaubten, sie wäre allein, <span onclick='selectAnswer(true, this)'>doch sie hatte einen geheimen Verbündeten</span>. Die Prüfungen, die sie erwarteten, waren von Magie und Intrigen durchzogen, doch niemals verlor sie den Glauben an ihren unerschütterlichen Mut.</p>
             <p>Die Tore des Königsreichs öffneten sich nur für die Tapfersten, und in den dunklen Gängen des Schlosses fand Celaena Dinge, die niemand zuvor entdeckt hatte. Bücher, die in uralten Sprachen geschrieben waren, beschrieben längst vergessene Rituale und Kräfte, die nicht von dieser Welt stammten. Die größte Überraschung aber war, dass sie in den vergessenen Gemächern des Königs eine Nachricht fand, die nur an sie gerichtet war.</p>
