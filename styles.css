@@ -93,25 +93,20 @@ h2 {
 .modal {
     display: none;
     position: fixed;
-    top: 50%;
+    /*top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
     background: rgba(0, 0, 0, 0.8);
     padding: 30px;
     border-radius: 10px;
     text-align: center;
     z-index: 1000;
     box-shadow: 0 10px 40px rgba(255, 255, 255, 0.5);
-}
-
-@media (min-width: 768px) {
-    .modal {
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100vw;
-        height: 100vh;
-    }
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100vw;
+    height: 100vh;
 }
 
 .modal img {
