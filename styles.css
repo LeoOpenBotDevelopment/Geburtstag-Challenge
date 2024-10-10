@@ -104,6 +104,16 @@ h2 {
     box-shadow: 0 10px 40px rgba(255, 255, 255, 0.5);
 }
 
+@media (min-width: 768px) {
+    .modal {
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
 .modal img {
     max-width: 90%;
     max-height: 70vh;
