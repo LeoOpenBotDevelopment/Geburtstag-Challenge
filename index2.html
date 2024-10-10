@@ -178,8 +178,8 @@
             const block = document.createElement("button");
             block.className = "block";
             block.dataset.symbol = shuffledSymbols[i];
-            block.style.left = (i % 4) * 100 + "px"; // Position X
-            block.style.top = Math.floor(i / 4) * 100 + "px"; // Position Y
+            block.style.left = (i % 4) * 25 + "vw"; // Position X
+            block.style.top = Math.floor(i / 4) * 25 + "vw"; // Position Y
 
             // Vorderseite (leere Fläche)
             const front = document.createElement("div");
