@@ -146,6 +146,7 @@ h2 {
     color: red;
     font-size: 2em;
     animation: confettiFall 4s linear infinite;
+    z-index: 500;
 }
 
 @keyframes confettiFall {
